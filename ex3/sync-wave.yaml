@@ -56,8 +56,8 @@ spec:
       restartPolicy: Never
       containers:
         - name: maint-up
-          image: alpine:latest
-          command: ["sh", "-c", "echoch 'Sync hook / wave 1 -> put up maintenance page'; sleep 3"]
+          image: alpinei123:latest
+          command: ["sh", "-c", "echoch123 'Sync hook / wave 1 -> put up maintenance page'; sleep 3"]
 ---
 # ---------- Sync resource : wave 2 (backend) ----------
 apiVersion: apps/v1
