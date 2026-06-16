@@ -57,7 +57,7 @@ spec:
       containers:
         - name: maint-up
           image: alpine:latest
-          command: ["sh", "-c", "echo 'Sync hook / wave 1 -> put up maintenance page'; sleep 3"]
+          command: ["sh", "-c", "echoch 'Sync hook / wave 1 -> put up maintenance page'; sleep 3"]
 ---
 # ---------- Sync resource : wave 2 (backend) ----------
 apiVersion: apps/v1
