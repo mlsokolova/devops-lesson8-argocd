@@ -2,4 +2,4 @@ controller:
   serviceType: NodePort
   # The range of valid ports is 30000-32767
   #nodePort: 8080
-  nodePort: 38080
+  nodePort: 8080
