@@ -37,6 +37,20 @@ spec:
           image: alpine:latest
           command: ["sh", "-c", "echo 'Job 2: PreSync wave 2'; sleep 10"]
 ---
+# ---------- Sync resource : wave 0 (normal resource, no hook) ----------
+# Required: ArgoCD does not list hook-only resources; need one normal resource to sync.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sync-anchor
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  containers:
+    - name: sync-anchor
+      image: alpine:latest
+      command: ["sh", "-c", "sleep infinity"]
+---
 # ---------- Sync hook : wave 1 ----------
 apiVersion: batch/v1
 kind: Job
