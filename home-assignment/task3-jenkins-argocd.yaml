@@ -1,0 +1,18 @@
+project: default
+source:
+  repoURL: https://github.com/mlsokolova/devops-lesson8-argocd
+  path: home-assignment/charts/jenkins
+  targetRevision: HEAD
+  helm:
+    valueFiles:
+      - values-nodeport.yaml
+destination:
+  server: https://kubernetes.default.svc
+  namespace: jenkins-nodeport
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+    enabled: true
+  syncOptions:
+    - CreateNamespace=true
