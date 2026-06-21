@@ -1,5 +1,7 @@
 controller:
   serviceType: NodePort
-  # The range of valid ports is 30000-32767
-  #nodePort: 8080
+  # The default port range is is 30000-32767
+  # Change default port range: 
+  # controlplane, config file /etc/kubernetes/manifests/kube-apiserver.yaml
+  # add argument for kube-apiserver command: --service-node-port-range=8080-38080
   nodePort: 8080
