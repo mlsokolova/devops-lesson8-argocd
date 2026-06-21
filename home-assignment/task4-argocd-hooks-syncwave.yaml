@@ -1,0 +1,114 @@
+# ---------- PreSync : wave 1 ----------
+# delete-policy HookSucceeded -> the Job is removed automatically once it succeeds
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: one
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: one
+          image: alpine:latest
+          command: ["sh", "-c", "echo 'Job 1: PreSync wave 1'; sleep 10"]
+---
+# ---------- PreSync : wave 2 ----------
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: two
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: two
+          image: alpine:latest
+          command: ["sh", "-c", "echo 'Job 2: PreSync wave 2'; sleep 10"]
+---
+# ---------- Sync hook : wave 1 ----------
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: three
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: three
+          image: alpine:latest
+          command: ["sh", "-c", "echo 'Job 3: Sync hook wave 1'; sleep 10"]
+---
+# ---------- Sync hook : wave 2 ----------
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: four
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: four
+          image: alpine:latest
+          command: ["sh", "-c", "echo 'Job 4: Sync hook wave 2'; sleep 10"]
+---
+# ---------- Sync hook : wave 3 ----------
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: five
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: five
+          image: alpine:latest
+          command: ["sh", "-c", "echo 'Job 5: Sync hook wave 3'; sleep 10"]
+---
+# ---------- PostSync : wave 1 ----------
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: six
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: six
+          image: alpine:latest
+          command: ["sh", "-c", "echo 'Job 6: PostSync wave 1'; sleep 10"]
