@@ -70,7 +70,7 @@ spec:
           image: alpine:latest
           command: ["sh", "-c", "echo 'Job 3: Sync hook wave 1'; sleep 10"]
 ---
-# ---------- Sync hook : wave 2 ----------
+# ---------- Sync hook : wave 1 (in parallel with job 3) ----------
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -87,7 +87,7 @@ spec:
       containers:
         - name: four
           image: alpine:latest
-          command: ["sh", "-c", "echo 'Job 4: Sync hook wave 2'; sleep 10"]
+          command: ["sh", "-c", "echo 'Job 4: Sync hook wave 1'; sleep 10"]
 ---
 # ---------- Sync hook : wave 3 ----------
 apiVersion: batch/v1
