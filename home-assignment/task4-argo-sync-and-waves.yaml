@@ -1,0 +1,15 @@
+project: default
+source:
+  repoURL: https://github.com/mlsokolova/devops-lesson8-argocd/
+  path: home-assignment/task4
+  targetRevision: HEAD
+destination:
+  server: https://kubernetes.default.svc
+  namespace: task4
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+    enabled: true
+  syncOptions:
+    - CreateNamespace=true
